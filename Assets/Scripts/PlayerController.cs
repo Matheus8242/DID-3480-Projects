@@ -8,16 +8,24 @@ public class PlayerController : MonoBehaviour
     public float speed;
     public Text countText;
     public Text winText;
+    public Text scoreText;
+    public Text loseText;
+    public Text livesText;
 
     private Rigidbody rb;
-    private int count;
+    private int countValue;
+    private static int scoreValue;
+    private static int livesValue;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        count = 0;
-        SetCountText();
+        countValue = 0;
+        scoreValue = 0;
+        livesValue = 3;
+        SetAllText();
         winText.text = "";
+        loseText.text = "";
     }
 
     void FixedUpdate()
@@ -30,22 +38,41 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(movement * speed);
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Pick Up"))
+        if (other.gameObject.CompareTag("Pick Up"))
         {
             other.gameObject.SetActive(false);
-            count = count + 1;
-            SetCountText();
+            countValue = countValue + 1;
+            scoreValue = scoreValue + 1; 
+            SetAllText();
+        }
+        else if (other.gameObject.CompareTag("Enemy"))
+        {
+            other.gameObject.SetActive(false);
+            scoreValue = scoreValue - 1;
+            livesValue = livesValue - 1;
+            SetAllText();
+        }
+        if (countValue == 12)
+        {
+            transform.position = new Vector3(61f, gameObject.transform.position.y, 3.0f);
         }
     }
 
-    void SetCountText()
+    void SetAllText()
     {
-        countText.text = "Count: " + count.ToString();
-        if(count >= 12)
+        countText.text = "Count: " + countValue.ToString();
+        scoreText.text = "Score: " + scoreValue.ToString();
+        livesText.text = "Lives: " + livesValue.ToString();
+        if (countValue >= 22)
         {
             winText.text = "You win!";
+        }
+        if(livesValue == 0)
+        {
+            Destroy(gameObject);
+            loseText.text = "Game Over";
         }
     }
 
