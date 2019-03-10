@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - PickUp
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -45,8 +47,17 @@ TagManager:
   - name: Brick background
     uniqueID: 1337985389
     locked: 0
+  - name: Platform
+    uniqueID: 381721737
+    locked: 0
   - name: Ground
     uniqueID: 2704462853
+    locked: 0
+  - name: Pickups
+    uniqueID: 293933663
+    locked: 0
+  - name: UFO Enemy
+    uniqueID: 3139626393
     locked: 0
   - name: Player
     uniqueID: 843852795
