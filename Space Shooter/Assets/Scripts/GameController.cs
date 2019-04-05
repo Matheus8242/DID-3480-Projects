@@ -84,8 +84,8 @@ public class GameController : MonoBehaviour
 
     void UpdateScore()
     {
-        ScoreText.text = "Score: " + score;
-        if (score >= 200)
+        ScoreText.text = "Points: " + score;
+        if (score >= 100)
         {
             winText.text = "You win!";
             creditsText.text = "Game Created by Matheus Campos.";
